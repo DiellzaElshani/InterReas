@@ -1,0 +1,261 @@
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix bot:    <https://w3id.org/bot#> .
+@prefix omg:    <https://w3id.org/omg#> .
+@prefix dicbm:  <https://digitalconstruction.github.io/BuildingMaterials/latest#> .
+
+@prefix tbo:    <https://w3id.org/tbo#> .
+@base           <https://w3id.org/tbo> .
+
+<> a owl:Ontology ;
+   rdfs:label "Timber Building Ontology (TBO)"@en ;
+   owl:imports <https://w3id.org/bot> .
+
+####################  Classes  ####################
+
+tbo:TimberBuilding a owl:Class ;
+    rdfs:subClassOf bot:Building .
+
+# Timber Building Elements
+tbo:TimberBuildingElement a owl:Class ;
+    rdfs:subClassOf bot:Element .
+
+# Walls
+tbo:Wall a owl:Class ;
+    rdfs:subClassOf tbo:TimberBuildingElement ;
+    owl:disjointWith tbo:Beam , tbo:Column , tbo:Slab , tbo:Opening , tbo:Staircase .
+
+tbo:Partitions a owl:Class ;
+    rdfs:subClassOf tbo:Wall .
+
+# Roof and Structure
+tbo:RoofStructure a owl:Class ;
+    rdfs:subClassOf tbo:TimberBuildingElement ;
+    owl:disjointWith tbo:Opening , tbo:Staircase , tbo:Wall .
+
+tbo:Shell a owl:Class ;
+    rdfs:subClassOf tbo:RoofStructure .
+
+# Slabs
+tbo:Slab a owl:Class ;
+    rdfs:subClassOf tbo:TimberBuildingElement ;
+    owl:disjointWith tbo:Beam , tbo:Column , tbo:Opening , tbo:Wall .
+
+tbo:ShearWeb a owl:Class ;
+    rdfs:subClassOf tbo:Slab .
+
+# Cladding / Envelope
+tbo:BuildingEnvelope a owl:Class ;
+    rdfs:subClassOf tbo:TimberBuildingElement ;
+    owl:disjointWith tbo:Beam , tbo:Column , tbo:Slab , tbo:Opening , tbo:Staircase .
+
+tbo:Cladding a owl:Class ;
+    rdfs:subClassOf tbo:BuildingEnvelope .
+
+# Opening Types
+tbo:Opening a owl:Class ;
+    rdfs:subClassOf tbo:TimberBuildingElement ;
+    owl:disjointWith tbo:Beam , tbo:Column , tbo:Slab , tbo:Staircase , tbo:Wall .
+
+tbo:Staircase a owl:Class ;
+    rdfs:subClassOf tbo:TimberBuildingElement ;
+    owl:disjointWith tbo:Beam , tbo:Column , tbo:Opening , tbo:Wall .
+
+# Column
+tbo:Column a owl:Class ;
+    rdfs:subClassOf tbo:TimberBuildingElement ;
+    owl:disjointWith tbo:Beam , tbo:Slab , tbo:Opening , tbo:Staircase , tbo:Wall .
+
+# Beam
+tbo:Beam a owl:Class ;
+    rdfs:subClassOf tbo:TimberBuildingElement ;
+    owl:disjointWith tbo:Column , tbo:Slab , tbo:Opening , tbo:Staircase , tbo:Wall .
+
+# Joints + enumerations
+tbo:Joint a owl:Class ;
+    rdfs:subClassOf tbo:TimberBuildingElement ,
+        [ a owl:Restriction ; owl:onProperty tbo:hasJointType ; owl:cardinality "1"^^xsd:nonNegativeInteger ] ;
+    owl:disjointWith tbo:Beam , tbo:Column , tbo:Slab , tbo:Opening , tbo:Staircase , tbo:Wall .
+
+tbo:JointType a owl:Class ;
+    owl:oneOf ( tbo:Physical tbo:Chemical tbo:Mechanical ) .
+
+tbo:JointAngle a owl:Class ;
+    owl:oneOf ( tbo:Joint90Degree tbo:JointNot90Degree ) .
+
+# Named Joint Types
+tbo:Physical   a owl:NamedIndividual , tbo:JointType .
+tbo:Chemical   a owl:NamedIndividual , tbo:JointType .
+tbo:Mechanical a owl:NamedIndividual , tbo:JointType .
+
+# Named Joint Angles
+tbo:Joint90Degree     a owl:NamedIndividual , tbo:JointAngle .
+tbo:JointNot90Degree  a owl:NamedIndividual , tbo:JointAngle .
+
+# Materials
+dicbm:Material a owl:Class .
+
+tbo:Natural a owl:Class ;
+    rdfs:subClassOf dicbm:Material ;
+    owl:disjointWith tbo:EngineeredWoodProduct .
+
+tbo:Lumber a owl:Class ;
+    rdfs:subClassOf tbo:Natural .
+
+tbo:EngineeredWoodProduct a owl:Class ;
+    rdfs:subClassOf dicbm:Material ;
+    owl:disjointWith tbo:Natural .
+
+tbo:GLT a owl:Class ;
+    rdfs:subClassOf tbo:EngineeredWoodProduct ;
+    owl:disjointWith tbo:LVLBeech , tbo:CLT .
+
+tbo:LVLBeech a owl:Class ;
+    rdfs:subClassOf tbo:EngineeredWoodProduct ;
+    owl:disjointWith tbo:GLT , tbo:CLT .
+
+tbo:CLT a owl:Class ;
+    rdfs:subClassOf tbo:EngineeredWoodProduct ;
+    owl:disjointWith tbo:LVLBeech , tbo:GLT .
+
+####################  Datatype Properties  ####################
+
+tbo:isLoadBearing a owl:DatatypeProperty ;
+    rdfs:domain tbo:TimberBuildingElement ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "is load bearing"@en .
+
+tbo:hasWallHookForFab a owl:DatatypeProperty ;
+    rdfs:domain tbo:Wall ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "has wall hook for fabrication"@en .
+
+tbo:charringRate_mmPerMin a owl:DatatypeProperty ;
+    rdfs:domain dicbm:Material ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "charring rate in mm per minute"@en .
+
+tbo:reactionToFireClass a owl:DatatypeProperty ;
+    rdfs:domain dicbm:Material ;
+    rdfs:range xsd:string ;
+    rdfs:label "reaction to fire class"@en .
+
+tbo:zeroStrengthLayer_mm a owl:DatatypeProperty ;
+    rdfs:domain dicbm:Material ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "zero strength layer in mm"@en .
+
+tbo:hasMoistureContent a owl:DatatypeProperty ;
+    rdfs:domain dicbm:Material ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "has Moisture Content"@en .
+
+tbo:hasFireRating a owl:DatatypeProperty ;
+    rdfs:domain tbo:TimberBuildingElement ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "has Fire Rating"@en .
+
+tbo:hasStrength a owl:DatatypeProperty ;
+    rdfs:domain tbo:TimberBuildingElement ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "has Strength"@en .
+
+tbo:hasAcousticRating a owl:DatatypeProperty ;
+    rdfs:domain tbo:TimberBuildingElement ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "has Acoustic Rating"@en .
+
+####################  Object Properties  ####################
+
+tbo:hasElements a owl:ObjectProperty ;
+    rdfs:domain tbo:TimberBuilding ;
+    rdfs:range  tbo:TimberBuildingElement ;
+    rdfs:label "has elements"@en .
+
+tbo:hasJointType a owl:ObjectProperty ;
+    rdfs:domain tbo:Joint ;
+    rdfs:range  tbo:JointType ;
+    rdfs:label "has joint type"@en .
+
+tbo:hasJointAngle a owl:ObjectProperty ;
+    rdfs:domain tbo:Joint ;
+    rdfs:range  tbo:JointAngle ;
+    rdfs:label "has joint angle"@en .
+
+tbo:hasMaterial a owl:ObjectProperty ;
+    rdfs:domain tbo:TimberBuildingElement ;
+    rdfs:range  dicbm:Material ;
+    rdfs:label "has material"@en .
+
+tbo:hasGeometryDescription a owl:ObjectProperty ;
+    rdfs:domain tbo:TimberBuildingElement ;
+    rdfs:range omg:Geometry .
+
+tbo:hasOpening a owl:ObjectProperty ;
+    rdfs:domain tbo:Wall , tbo:BuildingEnvelope , tbo:Slab ;
+    rdfs:range  tbo:Opening ;
+    rdfs:label "has opening"@en .
+
+tbo:hasShearWeb a owl:ObjectProperty ;
+    rdfs:domain tbo:Slab ;
+    rdfs:range  tbo:ShearWeb ;
+    rdfs:label "has shear web"@en .
+
+tbo:supports a owl:ObjectProperty ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( tbo:Beam tbo:Column ) ] ;
+    rdfs:range  [ a owl:Class ; owl:unionOf ( tbo:Slab tbo:Beam ) ] ;
+    rdfs:label "supports"@en .
+
+####################  Labels  ####################
+#Class Labels
+tbo:TimberBuilding          rdfs:label "Timber Building"@en .
+tbo:TimberBuildingElement   rdfs:label "Timber Building Element"@en .
+tbo:Wall                    rdfs:label "Wall"@en .
+tbo:Partitions              rdfs:label "Partitions"@en .
+tbo:RoofStructure           rdfs:label "Roof Structure"@en .
+tbo:Shell                   rdfs:label "Roof Shell"@en .
+tbo:Slab                    rdfs:label "Slab"@en .
+tbo:ShearWeb                rdfs:label "Shear Web"@en .
+tbo:BuildingEnvelope        rdfs:label "Building Envelope"@en .
+tbo:Cladding                rdfs:label "Cladding"@en .
+tbo:Opening                 rdfs:label "Opening"@en .
+tbo:Staircase               rdfs:label "Staircase"@en .
+tbo:Column                  rdfs:label "Column"@en .
+tbo:Beam                    rdfs:label "Beam"@en .
+tbo:Joint                   rdfs:label "Joint"@en .
+tbo:JointType               rdfs:label "Joint Type"@en .
+tbo:Physical                rdfs:label "Physical Joint"@en .
+tbo:Chemical                rdfs:label "Chemical Joint"@en .
+tbo:Mechanical              rdfs:label "Mechanical Joint"@en .
+tbo:Joint90Degree           rdfs:label "90 Degree Joint"@en .
+tbo:JointNot90Degree        rdfs:label "Non 90 Degree Joint"@en .
+dicbm:Material                rdfs:label "Material"@en .
+tbo:Natural                 rdfs:label "Natural Material"@en .
+tbo:Lumber                  rdfs:label "Lumber"@en .
+tbo:EngineeredWoodProduct   rdfs:label "Engineered Wood Product"@en .
+tbo:GLT                     rdfs:label "GLT"@en .
+tbo:LVLBeech                rdfs:label "LVL Beech"@en .
+tbo:CLT                     rdfs:label "CLT"@en .
+
+#Data Property Labels
+tbo:isLoadBearing           rdfs:label "is load bearing"@en .
+tbo:hasWallHookForFab       rdfs:label "has wall hook for fabrication"@en .
+tbo:charringRate_mmPerMin   rdfs:label "charring rate in mm per minute"@en .
+tbo:reactionToFireClass     rdfs:label "reaction to fire class"@en .
+tbo:zeroStrengthLayer_mm    rdfs:label "zero strength layer in mm"@en .
+tbo:hasMoistureContent      rdfs:label "has Moisture Content"@en .
+tbo:hasFireRating           rdfs:label "has Fire Rating"@en .
+tbo:hasStrength             rdfs:label "has Strength"@en .
+tbo:hasAcousticRating       rdfs:label "has Acoustic Rating"@en .
+
+#Object Property Labels
+tbo:hasElements             rdfs:label "has elements"@en .
+tbo:hasJointType            rdfs:label "has joint type"@en .
+tbo:hasJointAngle           rdfs:label "has joint angle"@en .
+tbo:hasMaterial             rdfs:label "has material"@en .
+tbo:hasOpening              rdfs:label "has opening"@en .
+tbo:hasShearWeb             rdfs:label "has shear web"@en .
+tbo:supports                rdfs:label "supports"@en .
