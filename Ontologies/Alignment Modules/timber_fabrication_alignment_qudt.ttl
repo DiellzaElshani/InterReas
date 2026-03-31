@@ -1,0 +1,36 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix quantitykind: <http://qudt.org/vocab/quantitykind/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix tfo: <https://w3id.org/timber-fabrication-ontology#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+tfo:Pressure skos:closeMatch quantitykind:Pressure .
+
+tfo:ProcessParameter skos:closeMatch qudt:QuantityKind .
+
+tfo:RotationSpeed skos:closeMatch quantitykind:AngularVelocity .
+
+tfo:Time skos:closeMatch quantitykind:Time .
+
+tfo:hasHeightMM skos:closeMatch qudt:quantityValue ;
+    skos:relatedMatch unit:MilliM .
+
+tfo:hasLengthMM skos:closeMatch qudt:quantityValue ;
+    skos:relatedMatch unit:MilliM .
+
+tfo:hasWidthMM skos:closeMatch qudt:quantityValue ;
+    skos:relatedMatch unit:MilliM .
+
+tfo:maximumPressure skos:closeMatch qudt:applicableUnit .
+
+tfo:parameterUnit skos:closeMatch qudt:applicableUnit .
+
+<https://w3id.org/timber-fabrication-ontology/alignment/qudt> a owl:Ontology ;
+    dcterms:title "Timber Fabrication Ontology Alignment Module - QUDT"@en ;
+    rdfs:comment "Alignment module between the Timber Fabrication Ontology and QUDT for process parameters, units, and quantity kinds."@en ;
+    owl:imports <http://qudt.org/schema/qudt>,
+        <https://w3id.org/timber-fabrication-ontology> .
+

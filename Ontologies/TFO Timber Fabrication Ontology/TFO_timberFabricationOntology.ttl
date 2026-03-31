@@ -1,0 +1,556 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tbo: <https://w3id.org/tbo#> .
+@prefix tof: <https://w3id.org/timber-fabrication-ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/timber-fabrication-ontology> a owl:Ontology ;
+    rdfs:label "Timber Fabrication Ontology"@en ;
+    dcterms:creator "Diellza Elshani",
+        "Haris Isakovic",
+        "Laura Marsillo",
+        "Taras Bulubas" ;
+    dcterms:title "Timber Fabrication Ontology"@en ;
+    rdfs:comment "A compact ontology for timber fabrication covering planar and linear fabrication platforms, agents, stations, tools, tasks, timber elements, process constraints, process parameters, machine descriptions, and fabrication phases."@en ;
+    owl:imports <https://w3id.org/tbo> .
+
+tof:AssemblyTask a owl:Class ;
+    rdfs:label "AssemblyTask"@en ;
+    rdfs:comment "Task for assembling planar elements."@en ;
+    rdfs:subClassOf tof:FabricationTask .
+
+tof:BottomRail a owl:Class ;
+    rdfs:label "BottomRail"@en ;
+    rdfs:comment "Bottom rail on the planar platform."@en ;
+    rdfs:subClassOf tof:Rail .
+
+tof:ColumnElement a owl:Class ;
+    rdfs:label "ColumnElement"@en ;
+    rdfs:comment "A column element."@en ;
+    rdfs:subClassOf tbo:Column,
+        tof:LinearElement .
+
+tof:CuttingTask a owl:Class ;
+    rdfs:label "CuttingTask"@en ;
+    rdfs:comment "Task for cutting a linear element."@en ;
+    rdfs:subClassOf tof:FabricationTask .
+
+tof:DrillTool a owl:Class ;
+    rdfs:label "DrillTool"@en ;
+    rdfs:comment "A drilling tool."@en ;
+    rdfs:subClassOf tof:EndEffector .
+
+tof:DrillingTask a owl:Class ;
+    rdfs:label "DrillingTask"@en ;
+    rdfs:comment "Task for drilling a linear element."@en ;
+    rdfs:subClassOf tof:FabricationTask .
+
+tof:GeometricalConstraint a owl:Class ;
+    rdfs:label "Geometrical Constraint"@en ;
+    rdfs:comment "A process constraint related to size, shape, tolerances, reachability, or collision-free geometry."@en ;
+    rdfs:subClassOf tof:ProcessConstraint .
+
+tof:GlueApplicationTask a owl:Class ;
+    rdfs:label "GlueApplicationTask"@en ;
+    rdfs:comment "Task for applying glue."@en ;
+    rdfs:subClassOf tof:FabricationTask .
+
+tof:GlueTool a owl:Class ;
+    rdfs:label "GlueTool"@en ;
+    rdfs:comment "A glue application tool."@en ;
+    rdfs:subClassOf tof:EndEffector .
+
+tof:GlulamBeamElement a owl:Class ;
+    rdfs:label "GlulamBeamElement"@en ;
+    rdfs:comment "A glulam beam element."@en ;
+    rdfs:subClassOf tbo:Glulam,
+        tof:BeamElement .
+
+tof:Gripper a owl:Class ;
+    rdfs:label "Gripper"@en ;
+    rdfs:comment "A gripper tool used for pick and place."@en ;
+    rdfs:subClassOf tof:EndEffector .
+
+tof:InnerWallElement a owl:Class ;
+    rdfs:label "InnerWallElement"@en ;
+    rdfs:comment "An inner wall assembled on the planar platform."@en ;
+    rdfs:subClassOf tof:PlanarElement .
+
+tof:LinearAxis a owl:Class ;
+    rdfs:label "Linear Axis"@en ;
+    rdfs:comment "A translational axis."@en ;
+    rdfs:subClassOf tof:Axis .
+
+tof:LinearElementFabricationPlatform a owl:Class ;
+    rdfs:label "LinearElementFabricationPlatform"@en ;
+    rdfs:comment "Fabrication platform for linear elements such as beams, glulam beams, and columns."@en ;
+    rdfs:subClassOf tof:FabricationPlatform .
+
+tof:LinearElementInfeedTable a owl:Class ;
+    rdfs:label "LinearElementInfeedTable"@en ;
+    rdfs:comment "Infeed table for linear timber elements."@en ;
+    rdfs:subClassOf tof:MaterialInfeedTable .
+
+tof:LinearRail a owl:Class ;
+    rdfs:label "LinearRail"@en ;
+    rdfs:comment "A rail for a linear-element platform."@en ;
+    rdfs:subClassOf tof:Rail .
+
+tof:MaterialConstraint a owl:Class ;
+    rdfs:label "Material Constraint"@en ;
+    rdfs:comment "A process constraint related to material behavior, resistance, or allowable loading."@en ;
+    rdfs:subClassOf tof:ProcessConstraint .
+
+tof:MillTool a owl:Class ;
+    rdfs:label "MillTool"@en ;
+    rdfs:comment "A milling tool."@en ;
+    rdfs:subClassOf tof:EndEffector .
+
+tof:MillingTask a owl:Class ;
+    rdfs:label "MillingTask"@en ;
+    rdfs:comment "Task for milling a linear element."@en ;
+    rdfs:subClassOf tof:FabricationTask .
+
+tof:NailTool a owl:Class ;
+    rdfs:label "NailTool"@en ;
+    rdfs:comment "A nailing tool."@en ;
+    rdfs:subClassOf tof:EndEffector .
+
+tof:NailingTask a owl:Class ;
+    rdfs:label "NailingTask"@en ;
+    rdfs:comment "Task for fastening with nails."@en ;
+    rdfs:subClassOf tof:FabricationTask .
+
+tof:OutfeedStackingArea a owl:Class ;
+    rdfs:label "OutfeedStackingArea"@en ;
+    rdfs:comment "Outfeed or stacking area for completed elements."@en ;
+    rdfs:subClassOf tof:Station .
+
+tof:PickAndPlaceTask a owl:Class ;
+    rdfs:label "PickAndPlaceTask"@en ;
+    rdfs:comment "Task for picking and placing an element."@en ;
+    rdfs:subClassOf tof:FabricationTask .
+
+tof:PlanarElementFabricationPlatform a owl:Class ;
+    rdfs:label "PlanarElementFabricationPlatform"@en ;
+    rdfs:comment "Fabrication platform for planar elements such as walls and panels."@en ;
+    rdfs:subClassOf tof:FabricationPlatform .
+
+tof:ProcessingTime a owl:Class ;
+    rdfs:label "Processing Time"@en ;
+    rdfs:comment "The actual or planned processing time for a task or phase."@en ;
+    rdfs:subClassOf tof:Time .
+
+tof:RotationSpeed a owl:Class ;
+    rdfs:label "Rotation Speed"@en ;
+    rdfs:comment "Angular speed of a rotating axis or tool."@en ;
+    rdfs:subClassOf tof:VelocityParameter .
+
+tof:RotationalAxis a owl:Class ;
+    rdfs:label "Rotational Axis"@en ;
+    rdfs:comment "A rotational axis."@en ;
+    rdfs:subClassOf tof:Axis .
+
+tof:SawTool a owl:Class ;
+    rdfs:label "SawTool"@en ;
+    rdfs:comment "A saw or cutting tool."@en ;
+    rdfs:subClassOf tof:EndEffector .
+
+tof:StudElement a owl:Class ;
+    rdfs:label "StudElement"@en ;
+    rdfs:comment "A wall stud or inner beam used inside a wall."@en ;
+    rdfs:subClassOf tof:LinearElement .
+
+tof:ToolChangerStation a owl:Class ;
+    rdfs:label "ToolChangerStation"@en ;
+    rdfs:comment "Station where a robot changes tools."@en ;
+    rdfs:subClassOf tof:Station .
+
+tof:TopRail a owl:Class ;
+    rdfs:label "TopRail"@en ;
+    rdfs:comment "Top rail on the planar platform."@en ;
+    rdfs:subClassOf tof:Rail .
+
+tof:WallAssemblyTable a owl:Class ;
+    rdfs:label "WallAssemblyTable"@en ;
+    rdfs:comment "Table where an inner wall or panel is assembled."@en ;
+    rdfs:subClassOf tof:Table .
+
+tof:WallBeamSupplyTable a owl:Class ;
+    rdfs:label "WallBeamSupplyTable"@en ;
+    rdfs:comment "Supply table for wall studs or inner wall beams."@en ;
+    rdfs:subClassOf tof:Table .
+
+tof:appliesPressureTo a owl:ObjectProperty ;
+    rdfs:label "appliesPressureTo"@en ;
+    rdfs:comment "Links a fabrication task to the element receiving pressure or force."@en ;
+    rdfs:domain tof:FabricationTask ;
+    rdfs:range tof:FabricationElement .
+
+tof:axisCount a owl:DatatypeProperty ;
+    rdfs:label "axisCount"@en ;
+    rdfs:comment "Number of controllable axes of the machine."@en ;
+    rdfs:domain tof:Machine ;
+    rdfs:range xsd:integer .
+
+tof:fabricates a owl:ObjectProperty ;
+    rdfs:domain tof:FabricationTask ;
+    rdfs:range tof:FabricationElement .
+
+tof:handles a owl:ObjectProperty ;
+    rdfs:domain tof:Agent ;
+    rdfs:range tof:FabricationElement .
+
+tof:hasAxis a owl:ObjectProperty ;
+    rdfs:label "hasAxis"@en ;
+    rdfs:comment "Links a machine to one of its axes."@en ;
+    rdfs:domain tof:Machine ;
+    rdfs:range tof:Axis .
+
+tof:hasConstraint a owl:ObjectProperty ;
+    rdfs:label "hasConstraint"@en ;
+    rdfs:comment "Links a fabrication task to a process constraint."@en ;
+    rdfs:domain tof:FabricationTask ;
+    rdfs:range tof:ProcessConstraint .
+
+tof:hasCoordinateUnit a owl:DatatypeProperty ;
+    rdfs:domain tof:FabricationElement ;
+    rdfs:range xsd:string .
+
+tof:hasGeometryDescription a owl:DatatypeProperty ;
+    rdfs:domain tof:FabricationElement ;
+    rdfs:range xsd:string .
+
+tof:hasGeometryReference a owl:ObjectProperty ;
+    rdfs:domain tof:FabricationElement ;
+    rdfs:range <https://w3id.org/timber-fabrication-ontology#http://www.opengis.net/ont/geosparql#SpatialReferenceSystem> .
+
+tof:hasHeightMM a owl:DatatypeProperty ;
+    rdfs:domain tof:FabricationElement ;
+    rdfs:range xsd:decimal .
+
+tof:hasLengthMM a owl:DatatypeProperty ;
+    rdfs:domain tof:LinearElement ;
+    rdfs:range xsd:decimal .
+
+tof:hasOrientation a owl:ObjectProperty ;
+    rdfs:label "hasOrientation"@en ;
+    rdfs:comment "Links a machine to its orientation description."@en ;
+    rdfs:domain tof:Machine ;
+    rdfs:range tof:Orientation .
+
+tof:hasParameter a owl:ObjectProperty ;
+    rdfs:label "hasParameter"@en ;
+    rdfs:comment "Links a fabrication task to a process parameter."@en ;
+    rdfs:domain tof:FabricationTask ;
+    rdfs:range tof:ProcessParameter .
+
+tof:hasPartElement a owl:ObjectProperty ;
+    rdfs:domain tof:FabricationElement ;
+    rdfs:range tof:FabricationElement .
+
+tof:hasPhase a owl:ObjectProperty ;
+    rdfs:label "hasPhase"@en ;
+    rdfs:comment "Links a fabrication process to one of its phases."@en ;
+    rdfs:domain tof:FabricationProcess ;
+    rdfs:range tof:ProcessPhase .
+
+tof:hasPose a owl:ObjectProperty ;
+    rdfs:domain tof:Agent ;
+    rdfs:range tof:Pose .
+
+tof:hasPosition a owl:ObjectProperty ;
+    rdfs:label "hasPosition"@en ;
+    rdfs:comment "Links a machine to its position description."@en ;
+    rdfs:domain tof:Machine ;
+    rdfs:range tof:Position .
+
+tof:hasSequenceIndex a owl:DatatypeProperty ;
+    rdfs:domain tof:FabricationTask ;
+    rdfs:range xsd:integer .
+
+tof:hasWidthMM a owl:DatatypeProperty ;
+    rdfs:domain tof:FabricationElement ;
+    rdfs:range xsd:decimal .
+
+tof:locatedAt a owl:ObjectProperty ;
+    rdfs:domain tof:FabricationElement ;
+    rdfs:range tof:Station .
+
+tof:maximumHeight a owl:DatatypeProperty ;
+    rdfs:label "maximumHeight"@en ;
+    rdfs:comment "Maximum machine height."@en ;
+    rdfs:domain tof:Machine ;
+    rdfs:range xsd:float .
+
+tof:maximumLength a owl:DatatypeProperty ;
+    rdfs:label "maximumLength"@en ;
+    rdfs:comment "Maximum machine length."@en ;
+    rdfs:domain tof:Machine ;
+    rdfs:range xsd:float .
+
+tof:maximumPayloadKG a owl:DatatypeProperty ;
+    rdfs:label "maximumPayloadKG"@en ;
+    rdfs:comment "Maximum payload of the machine in kilograms."@en ;
+    rdfs:domain tof:Machine ;
+    rdfs:range xsd:float .
+
+tof:maximumPressure a owl:DatatypeProperty ;
+    rdfs:label "maximumPressure"@en ;
+    rdfs:comment "Maximum pressure that may be applied."@en ;
+    rdfs:domain tof:Pressure ;
+    rdfs:range xsd:float .
+
+tof:maximumReachMM a owl:DatatypeProperty ;
+    rdfs:label "maximumReachMM"@en ;
+    rdfs:comment "Maximum reach of the machine in millimetres."@en ;
+    rdfs:domain tof:Machine ;
+    rdfs:range xsd:float .
+
+tof:maximumRotationSpeed a owl:DatatypeProperty ;
+    rdfs:label "maximumRotationSpeed"@en ;
+    rdfs:comment "Maximum angular speed of the machine or relevant axis."@en ;
+    rdfs:domain tof:Machine ;
+    rdfs:range xsd:float .
+
+tof:maximumSize a owl:DatatypeProperty ;
+    rdfs:label "maximumSize"@en ;
+    rdfs:comment "Maximum overall machine size."@en ;
+    rdfs:domain tof:Machine ;
+    rdfs:range xsd:float .
+
+tof:maximumSpeed a owl:DatatypeProperty ;
+    rdfs:label "maximumSpeed"@en ;
+    rdfs:comment "Maximum speed of the machine in its declared unit system."@en ;
+    rdfs:domain tof:Machine ;
+    rdfs:range xsd:float .
+
+tof:maximumWidth a owl:DatatypeProperty ;
+    rdfs:label "maximumWidth"@en ;
+    rdfs:comment "Maximum machine width."@en ;
+    rdfs:domain tof:Machine ;
+    rdfs:range xsd:float .
+
+tof:mountedOn a owl:ObjectProperty ;
+    rdfs:domain tof:Robot ;
+    rdfs:range tof:Rail .
+
+tof:operatesFrom a owl:ObjectProperty ;
+    rdfs:domain tof:Human ;
+    rdfs:range tof:OperatorControlStation .
+
+tof:parameterUnit a owl:DatatypeProperty ;
+    rdfs:label "parameterUnit"@en ;
+    rdfs:comment "Unit used for a process parameter value."@en ;
+    rdfs:domain tof:ProcessParameter ;
+    rdfs:range xsd:string .
+
+tof:partOfPlatform a owl:ObjectProperty ;
+    rdfs:domain tof:Station ;
+    rdfs:range tof:FabricationPlatform .
+
+tof:performedAt a owl:ObjectProperty ;
+    rdfs:domain tof:FabricationTask ;
+    rdfs:range tof:Station .
+
+tof:performedBy a owl:ObjectProperty ;
+    rdfs:domain tof:FabricationTask ;
+    rdfs:range tof:Agent .
+
+tof:performedInPhase a owl:ObjectProperty ;
+    rdfs:label "performedInPhase"@en ;
+    rdfs:comment "Links a fabrication task to the process phase in which it is performed."@en ;
+    rdfs:domain tof:FabricationTask ;
+    rdfs:range tof:ProcessPhase .
+
+tof:phaseDuration a owl:DatatypeProperty ;
+    rdfs:label "phaseDuration"@en ;
+    rdfs:comment "Duration of a fabrication phase."@en ;
+    rdfs:domain tof:ProcessPhase ;
+    rdfs:range xsd:float .
+
+tof:positionX a owl:DatatypeProperty ;
+    rdfs:label "positionX"@en ;
+    rdfs:comment "X coordinate of a position."@en ;
+    rdfs:domain tof:Position ;
+    rdfs:range xsd:float .
+
+tof:positionY a owl:DatatypeProperty ;
+    rdfs:label "positionY"@en ;
+    rdfs:comment "Y coordinate of a position."@en ;
+    rdfs:domain tof:Position ;
+    rdfs:range xsd:float .
+
+tof:positionZ a owl:DatatypeProperty ;
+    rdfs:label "positionZ"@en ;
+    rdfs:comment "Z coordinate of a position."@en ;
+    rdfs:domain tof:Position ;
+    rdfs:range xsd:float .
+
+tof:precedesTask a owl:ObjectProperty ;
+    rdfs:domain tof:FabricationTask ;
+    rdfs:range tof:FabricationTask .
+
+tof:processingTime a owl:DatatypeProperty ;
+    rdfs:label "processingTime"@en ;
+    rdfs:comment "Actual or estimated processing time for a fabrication task."@en ;
+    rdfs:domain tof:FabricationTask ;
+    rdfs:range xsd:float .
+
+tof:producesElement a owl:ObjectProperty ;
+    rdfs:domain tof:FabricationTask ;
+    rdfs:range tof:FabricationElement .
+
+tof:rotationX a owl:DatatypeProperty ;
+    rdfs:label "rotationX"@en ;
+    rdfs:comment "Rotation about the X axis."@en ;
+    rdfs:domain tof:Orientation ;
+    rdfs:range xsd:float .
+
+tof:rotationY a owl:DatatypeProperty ;
+    rdfs:label "rotationY"@en ;
+    rdfs:comment "Rotation about the Y axis."@en ;
+    rdfs:domain tof:Orientation ;
+    rdfs:range xsd:float .
+
+tof:rotationZ a owl:DatatypeProperty ;
+    rdfs:label "rotationZ"@en ;
+    rdfs:comment "Rotation about the Z axis."@en ;
+    rdfs:domain tof:Orientation ;
+    rdfs:range xsd:float .
+
+tof:usesInputElement a owl:ObjectProperty ;
+    rdfs:domain tof:FabricationTask ;
+    rdfs:range tof:FabricationElement .
+
+tof:usesTool a owl:ObjectProperty ;
+    rdfs:domain tof:Agent ;
+    rdfs:range tof:Tool .
+
+tof:BeamElement a owl:Class ;
+    rdfs:label "BeamElement"@en ;
+    rdfs:comment "A timber beam element."@en ;
+    rdfs:subClassOf tbo:Beam,
+        tof:LinearElement .
+
+tof:FabricationProcess a owl:Class ;
+    rdfs:label "Fabrication Process"@en ;
+    rdfs:comment "A process composed of one or more fabrication phases."@en .
+
+tof:Human a owl:Class ;
+    rdfs:label "Human"@en ;
+    rdfs:comment "A human fabrication agent."@en ;
+    rdfs:subClassOf tof:Agent .
+
+tof:MaterialInfeedTable a owl:Class ;
+    rdfs:label "MaterialInfeedTable"@en ;
+    rdfs:comment "Input table for incoming material."@en ;
+    rdfs:subClassOf tof:Table .
+
+tof:OperatorControlStation a owl:Class ;
+    rdfs:label "OperatorControlStation"@en ;
+    rdfs:comment "Station used by a human operator for monitoring or control."@en ;
+    rdfs:subClassOf tof:Station .
+
+tof:PlanarElement a owl:Class ;
+    rdfs:label "PlanarElement"@en ;
+    rdfs:comment "A planar timber fabrication element."@en ;
+    rdfs:subClassOf tof:FabricationElement .
+
+tof:Pose a owl:Class ;
+    rdfs:label "Pose"@en ;
+    rdfs:comment "A robot or process pose."@en .
+
+tof:Pressure a owl:Class ;
+    rdfs:label "Pressure"@en ;
+    rdfs:comment "Pressure or force application; the pressure that can be applied to the material."@en ;
+    rdfs:subClassOf tof:ProcessParameter .
+
+tof:Robot a owl:Class ;
+    rdfs:label "Robot"@en ;
+    rdfs:comment "A robotic fabrication agent."@en ;
+    rdfs:subClassOf tof:Agent,
+        tof:Machine .
+
+tof:Time a owl:Class ;
+    rdfs:label "Time"@en ;
+    rdfs:comment "Duration of a process phase."@en ;
+    rdfs:subClassOf tof:ProcessParameter .
+
+tof:VelocityParameter a owl:Class ;
+    rdfs:label "Velocity Parameter"@en ;
+    rdfs:comment "A speed-related process or machine parameter."@en ;
+    rdfs:subClassOf tof:ProcessParameter .
+
+tof:Tool a owl:Class ;
+    rdfs:label "Tool"@en ;
+    rdfs:comment "A fabrication tool or end effector."@en .
+
+tof:Axis a owl:Class ;
+    rdfs:label "Axis"@en ;
+    rdfs:comment "A machine or robot axis."@en .
+
+tof:FabricationPlatform a owl:Class ;
+    rdfs:label "FabricationPlatform"@en ;
+    rdfs:comment "A fabrication platform or production cell."@en .
+
+tof:ProcessConstraint a owl:Class ;
+    rdfs:label "Process Constraint"@en ;
+    rdfs:comment "A constraint that limits how a fabrication process may be executed."@en .
+
+tof:ProcessPhase a owl:Class ;
+    rdfs:label "Process Phase"@en ;
+    rdfs:comment "A phase or step within a fabrication process."@en .
+
+tof:Table a owl:Class ;
+    rdfs:label "Table"@en ;
+    rdfs:comment "A table-like station."@en ;
+    rdfs:subClassOf tof:Station .
+
+tof:LinearElement a owl:Class ;
+    rdfs:label "LinearElement"@en ;
+    rdfs:comment "A linear timber element."@en ;
+    rdfs:subClassOf tof:FabricationElement .
+
+tof:Orientation a owl:Class ;
+    rdfs:label "Orientation"@en ;
+    rdfs:comment "An angular orientation description."@en .
+
+tof:Position a owl:Class ;
+    rdfs:label "Position"@en ;
+    rdfs:comment "A geometric or machine position description."@en .
+
+tof:Rail a owl:Class ;
+    rdfs:label "Rail"@en ;
+    rdfs:comment "A linear rail supporting robot movement."@en .
+
+tof:ProcessParameter a owl:Class ;
+    rdfs:label "Process Parameter"@en ;
+    rdfs:comment "A measurable process parameter relevant to fabrication."@en .
+
+tof:Agent a owl:Class ;
+    rdfs:label "Agent"@en ;
+    rdfs:comment "An acting entity in fabrication."@en .
+
+tof:EndEffector a owl:Class ;
+    rdfs:label "EndEffector"@en ;
+    rdfs:comment "A robot end effector."@en ;
+    rdfs:subClassOf tof:Tool .
+
+tof:Station a owl:Class ;
+    rdfs:label "Station"@en ;
+    rdfs:comment "A functional station in a fabrication platform."@en .
+
+tof:Machine a owl:Class ;
+    rdfs:label "Machine"@en ;
+    rdfs:comment "A fabrication machine or robotic system used in the production platform."@en .
+
+tof:FabricationElement a owl:Class ;
+    rdfs:label "FabricationElement"@en ;
+    rdfs:comment "An element participating in fabrication."@en .
+
+tof:FabricationTask a owl:Class ;
+    rdfs:label "FabricationTask"@en ;
+    rdfs:comment "A fabrication task."@en .
+

@@ -1,0 +1,45 @@
+@prefix bot: <https://w3id.org/bot#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix tfo: <https://w3id.org/timber-fabrication-ontology#> .
+
+tfo:BeamElement rdfs:subClassOf bot:Element .
+
+tfo:ColumnElement rdfs:subClassOf bot:Element .
+
+tfo:FabricationElement rdfs:subClassOf bot:Element .
+
+tfo:FabricationPlatform skos:closeMatch bot:Zone .
+
+tfo:LinearElement rdfs:subClassOf bot:Element .
+
+tfo:LinearElementFabricationPlatform skos:closeMatch bot:Zone .
+
+tfo:OperatorControlStation skos:closeMatch bot:Element .
+
+tfo:OutfeedStackingArea skos:closeMatch bot:Element .
+
+tfo:PlanarElement rdfs:subClassOf bot:Element .
+
+tfo:PlanarElementFabricationPlatform skos:closeMatch bot:Zone .
+
+tfo:Rail skos:closeMatch bot:Element .
+
+tfo:Station skos:closeMatch bot:Element .
+
+tfo:Table skos:closeMatch bot:Element .
+
+tfo:hasPartElement skos:closeMatch bot:hasSubElement .
+
+tfo:locatedAt skos:closeMatch bot:containsElement .
+
+tfo:partOfPlatform skos:closeMatch bot:hasSubElement .
+
+<https://w3id.org/timber-fabrication-ontology/alignment/bot> a owl:Ontology ;
+    dcterms:title "Timber Fabrication Ontology Alignment Module - BOT"@en ;
+    rdfs:comment "Lightweight alignment module between the Timber Fabrication Ontology and the Building Topology Ontology (BOT)."@en ;
+    owl:imports <https://w3id.org/bot>,
+        <https://w3id.org/timber-fabrication-ontology> .
+

@@ -1,0 +1,39 @@
+@prefix cora: <http://purl.org/ieee1872-owl/cora-bare#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rparts: <http://purl.org/ieee1872-owl/rparts#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sumo-cora: <http://purl.org/ieee1872-owl/sumo-cora#> .
+@prefix tfo: <https://w3id.org/timber-fabrication-ontology#> .
+
+tfo:Agent rdfs:subClassOf sumo-cora:Agent .
+
+tfo:Axis skos:closeMatch sumo-cora:Physical .
+
+tfo:EndEffector skos:closeMatch sumo-cora:Device .
+
+tfo:Human rdfs:subClassOf sumo-cora:Agent .
+
+tfo:Machine skos:closeMatch sumo-cora:Device .
+
+tfo:Orientation skos:closeMatch sumo-cora:Region .
+
+tfo:Position skos:closeMatch sumo-cora:Region .
+
+tfo:Rail skos:closeMatch sumo-cora:Device .
+
+tfo:Robot rdfs:subClassOf cora:Robot .
+
+tfo:Tool skos:closeMatch sumo-cora:Device .
+
+tfo:hasAxis skos:closeMatch rparts:robotPart .
+
+tfo:mountedOn skos:closeMatch cora:support .
+
+<https://w3id.org/timber-fabrication-ontology/alignment/cora> a owl:Ontology ;
+    dcterms:title "Timber Fabrication Ontology Alignment Module - CORA"@en ;
+    rdfs:comment "Lightweight alignment module between the Timber Fabrication Ontology and the IEEE 1872 Core Ontology for Robotics and Automation (CORA)."@en ;
+    owl:imports <http://purl.org/ieee1872-owl/cora-bare>,
+        <https://w3id.org/timber-fabrication-ontology> .
+
