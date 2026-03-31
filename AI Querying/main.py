@@ -25,7 +25,7 @@ from prompt_templates import (
 # CONFIGURATION
 # ============================================================
 
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = "sk-proj-..."
 OPENAI_MODEL = "gpt-5.4"
 
 REPO_ID = "12"
